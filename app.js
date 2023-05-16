@@ -14,7 +14,7 @@ app.use(require('./router/auth'));
 app.use(require('./router/authtutor'));
 app.use(require('./router/authadmin'));
 app.use(require('./router/assignments'));
-app.use(require('./tutors/editprofile'));
+app.use(require('./tutors/editProfile'));
 app.use(require('./middleware/authenticatetutor'));
 app.use(require('./router/tutorprofile'));
 app.use(require('./router/studentprofile'));
