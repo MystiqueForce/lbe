@@ -1,0 +1,46 @@
+import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import "./Login.css";
+
+const StudentLoginPage = () => {
+  const [name, setName] = useState('');
+  const [data, setData] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`/api/data?name=${name}`); // Replace '/api/data' with your API endpoint URL
+      const responseData = await response.json();
+      setData(responseData);
+      console.log(responseData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleNameChange} placeholder="Enter a name" />
+      <button onClick={fetchData}>Fetch Data</button>
+      {data ? (
+        <div>
+          <h2>Data:</h2>
+          <ul>
+            {[data].map((item) => (
+              <li key={item._id}>
+                <strong>Name:</strong> {item.password}, <strong>Email:</strong> {item.email}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>Click the button to fetch data.</p>
+      )}
+    </div>
+  );
+}
+
+export default StudentLoginPage;
